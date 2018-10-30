@@ -3,9 +3,12 @@ Module for the Maze class
 """
 
 from Cell import Cell
+from random import choice
 import os.path
 
 BOOL_CONVERTER = {"true": True, "false": False}
+
+# IDEA: Do it by flags (to generate the maze, avoiding to check everytime if it is generated successfully !)
 
 class Maze:
 	def __init__(self):
@@ -45,6 +48,8 @@ class Maze:
 			print('You probably miswrote the values, they could not be converted to integers')
 			exit(1)
 
+		assert self.__width > 0 and self.__width > 0, "Wrong values for width and height (must be greater than 0)"
+
 		self.__board = [[0 for x in range(self.__width)] for y in range(self.__height)]
 
 		for col in range(self.__width):
@@ -74,6 +79,8 @@ class Maze:
 			except EOFError:
 				print("Wrong file structure")
 				exit(1)
+
+		assert self.__width > 0 and self.__width > 0, "Wrong values for width and height (must be greater than 0)"
 
 		self.__board = [[0 for x in range(self.__width)] for y in range(self.__height)]
 
@@ -107,5 +114,76 @@ class Maze:
 				cell = Cell(col, line, self.__width, self.__height)
 				cell.set_walls([up_wall, right_wall, bottom_wall, left_wall])
 				self.__board[line][col] = cell
+
+	def generate_by_algorithm(self, w, h):
+		"""
+		The depth-first search algorithm of maze generation is frequently implemented using backtracking:
+
+		Make the initial cell the current cell and mark it as visited
+		While there are unvisited cells
+			If the current cell has any neighbours which have not been visited
+				Choose randomly one of the unvisited neighbours
+				Push the current cell to the stack
+				Remove the wall between the current cell and the chosen cell
+				Make the chosen cell the current cell and mark it as visited
+			Else if stack is not empty
+				Pop a cell from the stack
+				Make it the current cell
+		"""
+
+		self.__width = w
+		self.__height = h
+
+		self.__board = [[Cell(col, line, self.__width, self.__height) for col in range(self.__width)] for line in range(self.__height)]
+
+		stack = []
+
+		current_cell = self.__board[0][0]
+		current_cell.make_visited()
+
+		while not all(self.__board[i][j].is_visited() for i in range(self.__height) for j in range(self.__width)):
+			if not all(self.__board[i][j].is_visited() for (i,j) in current_cell.get_neighbors()):
+				unvisited = choice([self.__board[i][j] for (i,j) in current_cell.get_neighbors() if not self.__board[i][j].is_visited()])
+				stack.append(current_cell)
+				current_cell.remove_wall_between_cell(unvisited)
+				current_cell = unvisited
+				current_cell.make_visited()
+			elif stack:
+				current_cell = stack.pop()
+
+	def generate_text_file(self, file_dest):
+		assert self.__width > 0 and self.__height > 0,\
+			"You first need to generate a maze"
+
+		# The file has to be readable from the program so I need to write the width and height
+
+		with open(file_dest, "wt+") as file:
+
+			file.write(str(self.__width) + '\n')
+			file.write(str(self.__height) + '\n')
+
+			# First doing the up walls
+			up_walls = [self.__board[0][col].get_walls()[0] for col in range(self.__width)]
+			up_walls = list(map(lambda wall: '-' if wall else ' ', up_walls))
+			file.write('+' + '+'.join(up_walls) + '+\n')
+
+			for line in range(self.__height):
+				# side walls <=> all left walls + last right wall
+				side_walls = [self.__board[line][col].get_walls()[3] for col in range(self.__width)] + [self.__board[line][-1].get_walls()[1]]
+				bottom_walls = [self.__board[line][col].get_walls()[2] for col in range(self.__width)]
+
+				# Now converting
+				side_walls = list(map(lambda wall: '|' if wall else ' ', side_walls))
+				bottom_walls = list(map(lambda wall: '-' if wall else ' ', bottom_walls))
+
+				# print(' '.join(side_walls) + '\n')
+				# print((' '.join(side_walls) + '\n').encode('utf-8'))
+
+				file.write(' '.join(side_walls) + '\n')
+				file.write('+' + '+'.join(bottom_walls) + '+\n')
+
+
+
+
 
 
