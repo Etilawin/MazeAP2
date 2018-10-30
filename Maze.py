@@ -59,15 +59,15 @@ class Maze:
 
 				cell = Cell(col, line, self.__width, self.__height)
 				cell.set_walls([BOOL_CONVERTER.get(v.strip().lower(), False) for v in walls])
-				self.__board[col][line] = cell
+				self.__board[line][col] = cell
 
 	def generate_by_file(self, path):
-		assert os.path.exits(path), "The path may not exist or you don't have access to it"
+		assert os.path.exists(path), "The path may not exist or you don't have access to it"
 		with open(path, 'rb') as file:
 			try:
 				self.__width = int(file.readline())
 				self.__height = int(file.readline())
-				the_maze = file.read()
+				the_maze = file.read().decode().split('\n')
 			except ValueError:
 				print("Could no convert the first lines to integer, aborting")
 				exit(1)
@@ -75,8 +75,37 @@ class Maze:
 				print("Wrong file structure")
 				exit(1)
 
-		# Now converting textual maze to a 2 dimensional array cells
-		
+		self.__board = [[0 for x in range(self.__width)] for y in range(self.__height)]
 
+		# stripping
+		the_maze = [v.strip() for v in the_maze]
+
+		# Now converting textual maze to a 2 dimensional array cells
+		for col in range(self.__width):
+			for line in range(self.__height):
+
+				# Splitted by line then :
+				up_wall = the_maze[2*line][2*col + 1]
+				right_wall = the_maze[2*line + 1][2*col + 2]
+				bottom_wall = the_maze[2*line + 2][2*col + 1]
+				left_wall = the_maze[2*line + 1][2*col]
+
+				if (col, line) == (0, 0):
+					print(up_wall, right_wall, bottom_wall, left_wall)
+
+				assert all(v in (' ', '-') for v in (up_wall, bottom_wall)),\
+					"The values for bottom and top walls should be either a '-'(hyphen) or a ' '(space) " 
+				assert all(v in (' ', '|') for v in (right_wall, left_wall)),\
+					"The values for right and left walls should be either ' '(space) or '|'(pipe)"
+
+				# Converts to boolean
+				up_wall     = (up_wall     == '-')
+				bottom_wall = (bottom_wall == '-')
+				right_wall  = (right_wall  == '|')
+				left_wall   = (left_wall   == '|')
+
+				cell = Cell(col, line, self.__width, self.__height)
+				cell.set_walls([up_wall, right_wall, bottom_wall, left_wall])
+				self.__board[line][col] = cell
 
 
