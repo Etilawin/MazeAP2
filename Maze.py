@@ -7,8 +7,6 @@ from enum import Enum
 from random import choice
 import os.path
 
-BOOL_CONVERTER = {"true": True, "false": False}
-
 # IDEA: Do it by flags (to generate the maze, avoiding to check everytime if it is generated successfully !)
 
 class Method(Enum):
@@ -23,9 +21,11 @@ class Maze:
 			assert isinstance(path, str), "The path should be a string"
 			self.__generate_by_file(path)
 		else:
+			assert isinstance(width, int) and width > 0, "You must provide a valid width"
+			assert isinstance(height, int) and height > 0, "You must provide a valid height"
 			self.__width = width
 			self.__height = height
-			self.__board = [[Cell(col, row, width, height) for col in range(width)] for row in range(height)] # Empty board
+			self.__board = [[Cell(row, col, width, height) for col in range(width)] for row in range(height)] # Empty board
 
 	def get_width(self):
 		return self.__width
@@ -48,20 +48,10 @@ class Maze:
 			Where 4 is the column number
 			Where 50 is the row number
 			Walls may be given in the following order TOP, RIGHT, BOTTOM, LEFT
-			When True there is a wall
+			When True there is a wall (You may also put 1 and 0 for a faster way like this : `Chose walls for this cell: 1,0,1,0`)
 			Otherwise there is not (Be careful to miswriting)
 			Be careful that both cells do not have walls !
 			""")
-		try:
-			self.__width = int(input("Please enter the width of the board : "))
-			self.__height = int(input("Please enter the height of the board : "))
-		except ValueError:
-			print('You probably miswrote the values, they could not be converted to integers')
-			exit(1)
-
-		assert self.__width > 0 and self.__width > 0, "Wrong values for width and height (must be greater than 0)"
-
-		self.__board = [[0 for x in range(self.__width)] for y in range(self.__height)]
 
 		for col in range(self.__width):
 			for row in range(self.__height):
@@ -73,9 +63,7 @@ class Maze:
 					print(col, row)
 					walls = input("Chose walls for this cell: ").split(",")
 
-				cell = Cell(row, col, self.__width, self.__height)
-				cell.set_walls([BOOL_CONVERTER.get(v.strip().lower(), False) for v in walls])
-				self.__board[row][col] = cell
+				self.__board[row][col].set_walls([v.strip().lower() in ("1", "true") for v in walls])
 
 	def __generate_by_file(self, path):
 		assert os.path.exists(path), "The path may not exist or you don't have access to it"
