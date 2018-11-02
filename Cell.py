@@ -3,27 +3,45 @@ Module for the Cell class
 """
 
 class Cell:
-	def __init__(self, column, line, width, height):
+	def __init__(self, column, row, width, height):
 		self.__col = column
-		self.__line = line
-		self.__neighbors = [(line + y, column + x) for x,y in [(0, +1), (+1, 0), (0, -1), (-1, 0)] if 0 <= column + x < width  and 0 <= line + y < height]
+		self.__row = row
+		self.__neighbors = [(row + y, column + x) for y,x in [(-1, 0), (0, 1), (1, 0), (0, -1)] if 0 <= column + x < width  and 0 <= row + y < height]
 		self.__visited = False
 		self.__walls = [True, True, True, True]
 
 	def make_visited(self):
 		self.__visited = True
 
+	def make_unvisited(self):
+		self.__visited = False
+
 	def get_column(self):
 		return self.__col
 
-	def get_line(self):
-		return self.__line
+	def get_row(self):
+		return self.__row
 
 	def is_visited(self):
 		return self.__visited
 
 	def get_neighbors(self):
 		return self.__neighbors
+
+	def get_accessible_neighbors(self):
+		"""
+		This depends if there is a wall or not, the function will only return the neighbors which don't have any wall on this side
+		"""
+		accessibles = []
+		# TODO: Improve not to reroll through all the possible neighbors everytime
+		i = 0
+		for y,x in [(-1, 0), (0, 1), (1, 0), (0, -1)]:
+			if (self.__row + y, self.__col + x) in self.__neighbors:
+				if not self.__walls[i]:
+					accessibles.append((self.__row + y, self.__col + x))
+			i += 1
+		return accessibles
+
 
 	def set_walls(self, l):
 		assert len(l) == 4, "The list should have 4 elements"
@@ -42,17 +60,17 @@ class Cell:
 		"""
 		assert isinstance(another_cell, Cell), "The cell given should be a Cell object"
 		assert self is not another_cell, "The given cell should be another cell"
-		assert (another_cell.get_line(), another_cell.get_column()) in self.__neighbors, "The two cells are not neighbors"
+		assert (another_cell.get_row(), another_cell.get_column()) in self.__neighbors, "The two cells are not neighbors"
 
 		col_diff  = self.__col  - another_cell.get_column()
-		line_diff = self.__line - another_cell.get_line()
+		row_diff = self.__row - another_cell.get_row()
 
 		if col_diff:
 			self.remove_wall(2 + col_diff)
 			another_cell.remove_wall(2 - col_diff)
 		else:
-			self.remove_wall(1 - line_diff)
-			another_cell.remove_wall(1 + line_diff)
+			self.remove_wall(1 - row_diff)
+			another_cell.remove_wall(1 + row_diff)
 
 
 
