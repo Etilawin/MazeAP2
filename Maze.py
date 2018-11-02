@@ -26,6 +26,10 @@ class Maze:
 			self.__width = width
 			self.__height = height
 			self.__board = [[Cell(row, col, width, height) for col in range(width)] for row in range(height)] # Empty board
+			if method == Method.algorithm:
+				self.__generate_by_algorithm()
+			elif method == Method.hand:
+				self.__generate_by_hand()
 
 	def get_width(self):
 		return self.__width
@@ -147,6 +151,38 @@ class Maze:
 			for col in range(self.__width):
 				self.__board[row][col].make_unvisited()
 
+	def __repr__(self):
+		return self.__str__()
+
+	def __str__(self):
+
+		string = ""
+
+		string += str(self.__width) + '\n'
+		string += str(self.__height) + '\n'
+
+		# First doing the up walls
+		up_walls = [self.__board[0][col].get_walls()[0] for col in range(self.__width)]
+		up_walls = list(map(lambda wall: '-' if wall else ' ', up_walls))
+		string += '+' + '+'.join(up_walls) + '+\n'
+
+		for row in range(self.__height):
+			# side walls <=> all left walls + last right wall
+			side_walls = [self.__board[row][col].get_walls()[3] for col in range(self.__width)] + [self.__board[row][-1].get_walls()[1]]
+			bottom_walls = [self.__board[row][col].get_walls()[2] for col in range(self.__width)]
+
+			# Now converting
+			side_walls = list(map(lambda wall: '|' if wall else ' ', side_walls))
+			bottom_walls = list(map(lambda wall: '-' if wall else ' ', bottom_walls))
+
+			# print(' '.join(side_walls) + '\n')
+			# print((' '.join(side_walls) + '\n').encode('utf-8'))
+
+			string += ' '.join(side_walls) + '\n'
+			string += '+' + '+'.join(bottom_walls) + '+\n'
+
+		return string
+
 	def generate_text_file(self, file_dest):
 		assert self.__width > 0 and self.__height > 0,\
 			"You first need to generate a maze"
@@ -154,29 +190,7 @@ class Maze:
 		# The file has to be readable from the program so I need to write the width and height
 
 		with open(file_dest, "wt+") as file:
-
-			file.write(str(self.__width) + '\n')
-			file.write(str(self.__height) + '\n')
-
-			# First doing the up walls
-			up_walls = [self.__board[0][col].get_walls()[0] for col in range(self.__width)]
-			up_walls = list(map(lambda wall: '-' if wall else ' ', up_walls))
-			file.write('+' + '+'.join(up_walls) + '+\n')
-
-			for row in range(self.__height):
-				# side walls <=> all left walls + last right wall
-				side_walls = [self.__board[row][col].get_walls()[3] for col in range(self.__width)] + [self.__board[row][-1].get_walls()[1]]
-				bottom_walls = [self.__board[row][col].get_walls()[2] for col in range(self.__width)]
-
-				# Now converting
-				side_walls = list(map(lambda wall: '|' if wall else ' ', side_walls))
-				bottom_walls = list(map(lambda wall: '-' if wall else ' ', bottom_walls))
-
-				# print(' '.join(side_walls) + '\n')
-				# print((' '.join(side_walls) + '\n').encode('utf-8'))
-
-				file.write(' '.join(side_walls) + '\n')
-				file.write('+' + '+'.join(bottom_walls) + '+\n')
+			file.write(self.__str__())
 
 	def find_path(self, from_row, from_col, to_row, to_col):
 		"""

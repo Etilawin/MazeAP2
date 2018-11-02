@@ -42,6 +42,11 @@ class Cell:
 			i += 1
 		return accessibles
 
+	def __repr__(self):
+		return self.__str__()
+
+	def __str__(self):
+		return "({}, {})".format(self.__row, self.__col)
 
 	def set_walls(self, l):
 		assert len(l) == 4, "The list should have 4 elements"
