@@ -3,6 +3,7 @@ Module for the Maze class
 """
 
 from Cell import Cell
+from enum import Enum
 from random import choice
 import os.path
 
@@ -10,11 +11,21 @@ BOOL_CONVERTER = {"true": True, "false": False}
 
 # IDEA: Do it by flags (to generate the maze, avoiding to check everytime if it is generated successfully !)
 
+class Method(Enum):
+	hand = 1
+	file = 2
+	algorithm = 3
+
 class Maze:
-	def __init__(self):
-		self.__width = 0
-		self.__height = 0
-		# self.__board = [[Cell(col, row, width, height) for col in range(width)] for row in range(height)] # Empty board
+	def __init__(self, width = 0, height = 0, method = Method.algorithm, path = False):
+		assert isinstance(method, Method), "The method given is not supported"
+		if method == Method.file:
+			assert isinstance(path, str), "The path should be a string"
+			self.__generate_by_file(path)
+		else:
+			self.__width = width
+			self.__height = height
+			self.__board = [[Cell(col, row, width, height) for col in range(width)] for row in range(height)] # Empty board
 
 	def get_width(self):
 		return self.__width
@@ -25,7 +36,7 @@ class Maze:
 	def get_board(self):
 		return self.__board
 
-	def generate_by_hand(self):
+	def __generate_by_hand(self):
 		print("""
 			You are going to generate your maze by hand !
 			So you will chose the walls for each cell.
@@ -62,11 +73,11 @@ class Maze:
 					print(col, row)
 					walls = input("Chose walls for this cell: ").split(",")
 
-				cell = Cell(col, row, self.__width, self.__height)
+				cell = Cell(row, col, self.__width, self.__height)
 				cell.set_walls([BOOL_CONVERTER.get(v.strip().lower(), False) for v in walls])
 				self.__board[row][col] = cell
 
-	def generate_by_file(self, path):
+	def __generate_by_file(self, path):
 		assert os.path.exists(path), "The path may not exist or you don't have access to it"
 		with open(path, 'rb') as file:
 			try:
@@ -82,14 +93,14 @@ class Maze:
 
 		assert self.__width > 0 and self.__width > 0, "Wrong values for width and height (must be greater than 0)"
 
-		self.__board = [[0 for x in range(self.__width)] for y in range(self.__height)]
+		self.__board = [[Cell(row, col, self.__width, self.__height) for col in range(self.__width)] for row in range(self.__height)]
 
 		# stripping
-		the_maze = [v.strip() for v in the_maze]
+		the_maze = list(map(lambda x: x.strip(), the_maze))
 
 		# Now converting textual maze to a 2 dimensional array cells
-		for col in range(self.__width):
-			for row in range(self.__height):
+		for row in range(self.__height):
+			for col in range(self.__width):
 
 				# Splitted by row then :
 				up_wall = the_maze[2*row][2*col + 1]
@@ -108,11 +119,9 @@ class Maze:
 				right_wall  = (right_wall  == '|')
 				left_wall   = (left_wall   == '|')
 
-				cell = Cell(col, row, self.__width, self.__height)
-				cell.set_walls([up_wall, right_wall, bottom_wall, left_wall])
-				self.__board[row][col] = cell
+				self.__board[row][col].set_walls([up_wall, right_wall, bottom_wall, left_wall])
 
-	def generate_by_algorithm(self, w, h):
+	def __generate_by_algorithm(self):
 		"""
 		The depth-first search algorithm of maze generation is frequently implemented using backtracking:
 
@@ -131,7 +140,7 @@ class Maze:
 		self.__width = w
 		self.__height = h
 
-		self.__board = [[Cell(col, row, self.__width, self.__height) for col in range(self.__width)] for row in range(self.__height)]
+		self.__board = [[Cell(row, col, self.__width, self.__height) for col in range(self.__width)] for row in range(self.__height)]
 
 		stack = []
 

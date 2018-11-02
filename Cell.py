@@ -3,7 +3,7 @@ Module for the Cell class
 """
 
 class Cell:
-	def __init__(self, column, row, width, height):
+	def __init__(self, row, column, width, height):
 		self.__col = column
 		self.__row = row
 		self.__neighbors = [(row + y, column + x) for y,x in [(-1, 0), (0, 1), (1, 0), (0, -1)] if 0 <= column + x < width  and 0 <= row + y < height]
