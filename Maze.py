@@ -124,12 +124,6 @@ class Maze:
 				Pop a cell from the stack
 				Make it the current cell
 		"""
-
-		self.__width = w
-		self.__height = h
-
-		self.__board = [[Cell(row, col, self.__width, self.__height) for col in range(self.__width)] for row in range(self.__height)]
-
 		stack = []
 
 		current_cell = self.__board[0][0]
@@ -146,6 +140,9 @@ class Maze:
 				current_cell = stack.pop()
 
 		# Now reset cell state :
+		self.__unvisit_all_cells()
+
+	def __unvisit_all_cells(self):
 		for row in range(self.__height):
 			for col in range(self.__width):
 				self.__board[row][col].make_unvisited()
@@ -231,9 +228,7 @@ class Maze:
 				while path[-1] != current_cell:
 					path.pop()
 
-		for row in range(self.__height):
-			for col in range(self.__width):
-				self.__board[row][col].make_unvisited()
+		self.__unvisit_all_cells
 
 		return path
 
