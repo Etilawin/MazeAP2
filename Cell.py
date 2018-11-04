@@ -1,5 +1,15 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 """
-Module for the Cell class
+:mod:`Cell` module
+
+:author: `Kim Vallée <kim.vallee.etu@univ-lille.fr>`_
+
+:date:  2018, november
+
+This module implements the Cell class used to represent a cell in the maze.
+
 """
 
 class Cell:
