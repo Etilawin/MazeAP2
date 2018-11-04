@@ -17,7 +17,7 @@ This module uses from :mod:`Maze`:
 * :method:`Maze.get_height`
 * :method:`Maze.get_cell`
 
-and from :mod:`Cell`:
+And from :mod:`Cell`:
 
 * :method:`Cell.get_walls`
 
