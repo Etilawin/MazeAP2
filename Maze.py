@@ -1,13 +1,31 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 """
-Module for the Maze class
+:mod:`Maze` module
+
+:author: `Kim Vallée <kim.vallee.etu@univ-lille.fr>`_
+
+:date:  2018, november
+
+This module implements the class to create a maze. The maze may be built by hand, by file or by algorithm.
+Every choice is referenced in the Method class that allows specific flags.
+It is also able to find the path one point to another if it exists.
+The maze can be then saved into a file or printed on screen using the module `graphicalmaze`.
+
+This module uses from :mod:`Cell`:
+
+* :method:`Cell.make_visited`
+* :method:`Cell.get_neighbors`
+* :method:`Cell.remove_wall_between_cell`
+* :method:`Cell.get_accessible_neighbors`
 """
+
 
 from Cell import Cell
 from enum import Enum
 from random import choice
 import os.path
-
-# IDEA: Do it by flags (to generate the maze, avoiding to check everytime if it is generated successfully !)
 
 class Method(Enum):
 	hand = 1
@@ -39,6 +57,11 @@ class Maze:
 
 	def get_board(self):
 		return self.__board
+
+	def get_cell(self, row, col):
+		assert 0 <= row < self.__height, "The row should be between 0 and the height"
+		assert 0 <= col < self.__width, "The column should be between 0 and the width"
+		return self.__board[row][col]
 
 	def __generate_by_hand(self):
 		print("""
@@ -242,11 +265,6 @@ class Maze:
 				while path[-1] != current_cell:
 					path.pop()
 
-		self.__unvisit_all_cells
+		self.__unvisit_all_cells()
 
 		return path
-
-
-
-
-
