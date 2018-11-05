@@ -37,7 +37,9 @@ class MAZE(Enum):
 
 class Maze:
 	"""
-	This class provides a way to build a maze from different methods
+	This class provides a way to build a maze from different methods.
+	It also permits to find a path between two points if it exists.
+	And finally it is capable of creating a textual representation of the maze.
 	"""
 	def __init__(self, width = 0, height = 0, method = MAZE.algorithm, path = False):
 		"""
@@ -215,7 +217,7 @@ class Maze:
 
 		return string
 
-	def generate_text_file(self, file_dest):
+	def save_to_file(self, file_dest):
 		assert self.__width > 0 and self.__height > 0,\
 			"You first need to generate a maze"
 
