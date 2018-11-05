@@ -218,13 +218,15 @@ class Maze:
 		return string
 
 	def save_to_file(self, file_dest):
-		assert self.__width > 0 and self.__height > 0,\
-			"You first need to generate a maze"
-
 		# The file has to be readable from the program so I need to write the width and height
-
 		with open(file_dest, "wt+") as file:
 			file.write(self.__str__())
+
+	def save_desc_to_file(self, file_dest):
+		with open(file_dest, "wt+") as file:
+			file.write("Maze width : {}\n".format(self.__width))
+			file.write("Maze height : {}\n".format(self.__height))
+			file.write("Maze representation : \n{}".format(self.__str__()))
 
 	def find_path(self, from_row, from_col, to_row, to_col):
 		"""
