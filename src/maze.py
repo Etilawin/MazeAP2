@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-:mod:`Maze` module
+:mod:`maze` module
 
 :author: `Kim Vallée <kim.vallee.etu@univ-lille.fr>`_
 
@@ -135,7 +135,7 @@ class Maze:
 				left_wall = the_maze[2*row + 1][2*col]
 
 				assert all(v in (' ', '-') for v in (up_wall, bottom_wall)),\
-					"The values for bottom and top walls should be either a '-'(hyphen) or a ' '(space) " 
+					"The values for bottom and top walls should be either a '-'(hyphen) or a ' '(space) "
 				assert all(v in (' ', '|') for v in (right_wall, left_wall)),\
 					"The values for right and left walls should be either ' '(space) or '|'(pipe)"
 
@@ -239,7 +239,7 @@ class Maze:
 		while the current cell is not the destination cell and not all cells have been visited:
 			if there are unvisited cells in the neighborhood of the current cell:
 				chose one unvisited cell randomly
-				append 
+				append
 
 
 		The depth-first search algorithm of maze generation is frequently implemented using backtracking:

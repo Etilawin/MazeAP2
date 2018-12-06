@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-:mod:`Cell` module
+:mod:`cell` module
 
 :author: `Kim Vallée <kim.vallee.etu@univ-lille.fr>`_
 
@@ -86,6 +86,3 @@ class Cell:
 		else:
 			self.remove_wall(1 - row_diff)
 			another_cell.remove_wall(1 + row_diff)
-
-
-
