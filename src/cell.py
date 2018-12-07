@@ -13,7 +13,39 @@ This module implements the Cell class used to represent a cell in the maze.
 """
 
 class Cell:
-	""" Cell class to generate a Maze """
+	"""
+	Cell class to generate a Maze
+
+	:examples:
+
+	>>> cell = Cell(1, 0, 5, 5)
+	>>> cell.get_neighbors()
+	[(0, 0), (1, 1), (2, 0)]
+	>>> cell.is_visited()
+	False
+	>>> cell.make_visited()
+	>>> cell.is_visited()
+	True
+	>>> cell.get_row()
+	1
+	>>> cell.get_column()
+	0
+	>>> cell.set_walls([True, False, True, False])
+	>>> cell.get_accessible_neighbors()
+	[(1, 1)]
+	>>> print(cell)
+	(1, 0)
+	>>> near_cell = Cell(0, 0, 5, 5)
+	>>> near_cell.get_walls()
+	[True, True, True, True]
+	>>> cell.get_walls()
+	[True, False, True, False]
+	>>> cell.remove_wall_between_cell(near_cell)
+	>>> cell.get_walls()
+	[False, False, True, False]
+	>>> near_cell.get_walls()
+	[True, True, False, True]
+	"""
 
 	def __init__(self, row, column, width, height):
 		"""
@@ -27,36 +59,6 @@ class Cell:
 		:type width: int
 		:param height: the height of the maze
 		:type height: int
-
-		:examples:
-
-		>>> cell = Cell(1, 0, 5, 5)
-		>>> cell.get_neighbors()
-		[(0, 0), (1, 1), (2, 0)]
-		>>> cell.is_visited()
-		False
-		>>> cell.make_visited()
-		>>> cell.is_visited()
-		True
-		>>> cell.get_row()
-		1
-		>>> cell.get_column()
-		0
-		>>> cell.set_walls([True, False, True, False])
-		>>> cell.get_accessible_neighbors()
-		[(1, 1)]
-		>>> print(cell)
-		(1, 0)
-		>>> near_cell = Cell(0, 0, 5, 5)
-		>>> near_cell.get_walls()
-		[True, True, True, True]
-		>>> cell.get_walls()
-		[True, False, True, False]
-		>>> cell.remove_wall_between_cell(near_cell)
-		>>> cell.get_walls()
-		[False, False, True, False]
-		>>> near_cell.get_walls()
-		[True, True, False, True]
 		"""
 		self.__col = column
 		self.__row = row
@@ -79,6 +81,7 @@ class Cell:
 	def get_column(self):
 		"""
 		Get the column of a cell
+
 		:return: The column of this cell
 		:rtype: int
 		"""
@@ -87,6 +90,7 @@ class Cell:
 	def get_row(self):
 		"""
 		Get the row of a cell
+
 		:return: The row of this cell
 		:rtype: int
 		"""
@@ -95,6 +99,7 @@ class Cell:
 	def is_visited(self):
 		"""
 		Return the status of the cell
+
 		:return: The visited status of this cell
 		:rtype: bool
 		"""
@@ -103,6 +108,7 @@ class Cell:
 	def get_neighbors(self):
 		"""
 		Get the neighbors of the cell
+
 		:return: The neighbors of this cell
 		:rtype: list
 		"""
@@ -111,6 +117,7 @@ class Cell:
 	def get_accessible_neighbors(self):
 		"""
 		Get the neighbors only if there is no wall on this side
+
 		:return: The accessible neighbors only
 		:rtype: list
 		"""
@@ -127,6 +134,7 @@ class Cell:
 	def __repr__(self):
 		"""
 		Reinvocking the str function
+
 		:return: a 'tuple' of the form (self.__row, self.__column)
 		:rtype: str
 		"""
@@ -135,6 +143,7 @@ class Cell:
 	def __str__(self):
 		"""
 		Allows to see it only with its position
+
 		:return: a 'tuple' of the form (self.__row, self.__column)
 		:rtype: str
 		"""
@@ -143,9 +152,10 @@ class Cell:
 	def set_walls(self, l):
 		"""
 		Set the walls of this cell
+
 		:param l: A list containing all the new walls status
 		:type l: list
-		:CU: len(l) == 4 and all the elements are booleans
+		:UC: len(l) == 4 and all the elements are booleans
 		"""
 		assert len(l) == 4, "The list should have 4 elements"
 		assert all(isinstance(x, bool) for x in l),\
@@ -154,13 +164,14 @@ class Cell:
 
 	def remove_wall(self, i):
 		"""
-		Remove the walls of this cell
+		Remove the wall at index i of this cell
 		"""
 		self.__walls[i] = False
 
 	def get_walls(self):
 		"""
 		Get the walls of this cell
+
 		:return: The walls of this cell
 		:rtype: list
 		"""
@@ -170,8 +181,8 @@ class Cell:
 		"""
 		Removes the wall between this cell and another cell
 		(setting its value from True to False)
-		:CU: The two cells must be neighbors,
-			 and another cell should be an instance of Cell
+
+		:UC: The two cells must be neighbors, and another cell should be an instance of Cell
 		"""
 		assert isinstance(another_cell, Cell), "The cell given should be a Cell object"
 		assert self is not another_cell, "The given cell should be another cell"
