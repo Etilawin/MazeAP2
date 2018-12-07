@@ -19,35 +19,39 @@ Une cellule peut
 Class description
 -----------------
 
-.. autoclass:: Cell.Cell
+.. autoclass:: cell.Cell
 
 Methods
 -------
 
-.. automethod:: cell.Cell.is_revealed
+.. automethod:: cell.Cell.make_visited
 
-.. automethod:: cell.Cell.reveal
+.. automethod:: cell.Cell.make_unvisited
 
-.. automethod:: cell.Cell.is_bomb
+.. automethod:: cell.Cell.get_column
 
-.. automethod:: cell.Cell.set_bomb
+.. automethod:: cell.Cell.get_row
 
-.. automethod:: cell.Cell.is_hypothetic
+.. automethod:: cell.Cell.is_visited
 
-.. automethod:: cell.Cell.set_hypothetic
+.. automethod:: cell.Cell.get_neighbors
 
-.. automethod:: cell.Cell.unset_hypothetic
+.. automethod:: cell.Cell.get_accessible_neighbors
 
-.. automethod:: cell.Cell.number_of_bombs_in_neighborhood
+.. automethod:: cell.Cell.set_walls
 
-.. automethod:: cell.Cell.incr_number_of_bombs_in_neighborhood
+.. automethod:: cell.Cell.remove_wall
+
+.. automethod:: cell.Cell.get_walls
+
+.. automethod:: cell.Cell.remove_wall_between_cell
 
 
-Special method
---------------
-
-Only two special methods for this class.
+Special methods
+---------------
 
 .. automethod:: cell.Cell.__init__
 
 .. automethod:: cell.Cell.__str__
+
+.. automethod:: cell.Cell.__repr__

@@ -276,7 +276,12 @@ class Maze:
 			elif track_stack:
 				current_cell = track_stack.pop()
 				while path[-1] != current_cell:
-					path.pop()
+					try:
+						path.pop()
+					except IndexError:
+						self.__unvisit_all_cells()
+						return []
+
 
 		self.__unvisit_all_cells()
 
