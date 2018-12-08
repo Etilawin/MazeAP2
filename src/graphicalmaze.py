@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
+graphicalmaze module.
+
 :mod:`graphicalmaze` module
 
 :author: `Kim Vallée <kim.vallee.etu@univ-lille.fr>`_
