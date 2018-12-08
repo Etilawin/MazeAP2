@@ -2,6 +2,8 @@
 :mod: `cell` module
 ===================
 
+Module description
+------------------
 
 Ce module définit une classe pour représenter les cellules d'un labyrinthe,
 ces cellules ont 4 murs ou moins et peuvent-être 'visitées' au besoin des

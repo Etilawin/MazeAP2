@@ -40,6 +40,13 @@ GRID_COLOR = 'yellow'
 
 
 def show(maze):
+    """
+    Show a labyrinth with a Tkinter.
+
+    :param maze: The maze to show
+    :type maze: Maze
+    :UC: None
+    """
     assert isinstance(maze, Maze), "The parameter must be a maze"
 
     win = Tk()
@@ -84,6 +91,15 @@ def show(maze):
 
 
 def show_path(maze, path):
+    """
+    Show the path in a labyrinth using Tkinter.
+
+    :param maze: The maze
+    :type maze: Maze
+    :param path: A list of cell of the maze
+    :type path: list
+    :UC: Every element of the list must be a Cell
+    """
     assert isinstance(maze, Maze), "The parameter must be a maze"
     assert isinstance(path, list), "The path must be a list"
     assert all(isinstance(cell, Cell) for cell in path),\
