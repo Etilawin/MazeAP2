@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 """
+Maze Module.
+
 :mod:`maze` module
 
 :author: `Kim Vallée <kim.vallee.etu@univ-lille.fr>`_
@@ -33,9 +35,8 @@ import os.path
 
 
 class MAZE(Enum):
-    """
-    Class provided to have method of implementing the maze
-    """
+    """Class provided to have method of implementing the maze."""
+
     hand = 1
     file = 2
     algorithm = 3
@@ -48,6 +49,7 @@ class Maze:
     It also permits to find a path between two points if it exists.
     And finally it is capable of creating a textual representation of the maze.
     """
+
     def __init__(self, width=10, height=10, method=MAZE.algorithm, path=False):
         """
         Init a Maze.
@@ -85,20 +87,21 @@ class Maze:
                 self.__generate_by_hand()
 
     def get_width(self):
-        """Getter method for the width"""
+        """Getter method for the width."""
         return self.__width
 
     def get_height(self):
-        """Getter method for the height"""
+        """Getter method for the height."""
         return self.__height
 
     def get_board(self):
-        """Getter method for the board"""
+        """Getter method for the board."""
         return self.__board
 
     def get_cell(self, row, col):
         """
-        Getter method for the cell at row `row` and column `col`
+        Getter method for the cell at row `row` and column `col`.
+
         :param row: The row of the cell
         :type row: int
         :param col: The col of the cell
@@ -250,12 +253,11 @@ class Maze:
                 self.__board[row][col].make_unvisited()
 
     def __repr__(self):
-        """
-        """
+        """Representation of the maze uses str method."""
         return self.__str__()
 
     def __str__(self):
-
+        """Convert to a string."""
         string = ""
 
         string += str(self.__width) + '\n'
@@ -293,12 +295,29 @@ class Maze:
         return string
 
     def save_to_file(self, file_dest):
+        """
+        Save the maze to a file (that can be used afterward).
+
+        :param file_dest: The file destination
+        :type file_dest: str
+        """
         with open(file_dest, "wt+") as file:
             file.write(self.__str__())
 
     def find_path(self, from_row, from_col, to_row, to_col):
         """
+        Find the path from one cell to another.
 
+        Using a kind of backtracking algorithm find the path from one cell to
+        another.
+        :param from_row: Row of the origin cell
+        :type from_row: int
+        :param from_col: Column of the origin cell
+        :type from_col: int
+        :param to_row: Row of the final cell
+        :type to_row: int
+        :param to_col: Column of the final cell
+        :type to_col: int
         """
         track_stack = []
         path = []
