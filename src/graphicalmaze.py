@@ -28,8 +28,8 @@ To show a graphical maze one hase to:
 * or the `show_path` function on the created maze with a given path
 """
 
-from Maze import Maze
-from Cell import Cell
+from maze import Maze
+from cell import Cell
 
 from tkinter import Tk, Canvas
 

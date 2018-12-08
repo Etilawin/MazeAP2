@@ -26,7 +26,7 @@ This module uses from :mod:`Cell`:
 """
 
 
-from Cell import Cell
+from cell import Cell
 from enum import Enum
 from random import choice
 import os.path

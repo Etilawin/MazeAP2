@@ -63,6 +63,16 @@ Save to a file
 
   >>> a_maze.save_to_file('temporary_file.txt')
 
+Using graphical interface
+-------------------------
+
+  >>> import graphicalmaze
+  >>> from maze import *
+  >>> some_maze = Maze(width = 50, height = 50, method = MAZE.algorithm)
+  >>> graphicalmaze.show(some_maze)
+  >>> a_path = a_maze.find_path(0,0,49,49)
+  >>> graphicalmaze.show_path(some_maze, a_path)
+
 
 Project tree
 ============
