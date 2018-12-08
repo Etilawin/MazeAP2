@@ -5,18 +5,17 @@
 Module description
 ------------------
 
-Ce module définit une classe pour représenter les cellules d'un labyrinthe,
-ces cellules ont 4 murs ou moins et peuvent-être 'visitées' au besoin des
-algorithmes. Chaque cellule a une position, ce qui permet de déterminer ses
-voisins.
+This module defines a class to represent the cells of a maze, each cell has
+4 walls or less and might be visited if needed by the algorithms. Each cell
+has a position, which allows to determine its neighbors.
 
-Une cellule peut
+One cell may
 
-* Etre visitée ou non
-* Avoir un certain nombre de murs
-* Avoir un certain nombre de voisins
-* Avoir une ligne et une colonne ce qui permet de la détecter et éviter de
-  recalculer les voisins à chaque fois
+* Be visited or not
+* Have a certain amount of walls
+* Have a certain amount of neighbors
+* Have a position with a line and a col, which avoid recalculing the neighbors
+  everytime
 
 Class description
 -----------------
