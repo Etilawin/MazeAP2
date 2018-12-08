@@ -26,7 +26,7 @@ QuickStart
   >>> a_maze.save_to_file('temporary_file.txt')
   >>> from graphicalmaze import *
   >>> show(a_maze)
-  >>> show_path(solution)
+  >>> show_path(a_maze, solution)
 
 
 Generate by algorithm
