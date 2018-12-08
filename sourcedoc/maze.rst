@@ -51,13 +51,13 @@ Public methods
 Private methods
 ---------------
 
-.. automethod:: maze.Maze.__generate_by_hand
+.. automethod:: maze.Maze._Maze__generate_by_hand
 
-.. automethod:: maze.Maze.__generate_by_file
+.. automethod:: maze.Maze._Maze__generate_by_file
 
-.. automethod:: maze.Maze.__generate_by_algorithm
+.. automethod:: maze.Maze._Maze__generate_by_algorithm
 
-.. automethod:: maze.Maze.__unvisit_all_cells
+.. automethod:: maze.Maze._Maze__unvisit_all_cells
 
 Special methods
 ---------------
