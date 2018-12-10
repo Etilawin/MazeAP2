@@ -15,6 +15,9 @@ Getting started
 
 From the console
 ----------------
+
+.. code::
+
     $ cd maze
     $ python3 src/main.py -h # Prints help
     ...

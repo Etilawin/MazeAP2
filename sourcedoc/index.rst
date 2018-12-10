@@ -21,6 +21,9 @@ QuickStart
 ----------
 
 * From the console
+
+.. code::
+
     $ cd maze
     $ python3 src/main.py
     $ python3 src/main.py -h # Gives help
