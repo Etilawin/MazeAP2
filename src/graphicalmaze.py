@@ -41,7 +41,7 @@ BG_COLOR = 'black'
 GRID_COLOR = 'yellow'
 
 
-def show(maze):
+def show(the_maze):
     """
     Show a labyrinth with a Tkinter.
 
@@ -49,22 +49,22 @@ def show(maze):
     :type maze: Maze
     :UC: None
     """
-    assert isinstance(maze, Maze), "The parameter must be a maze"
+    assert isinstance(the_maze, Maze), "The parameter must be a maze"
 
     win = Tk()
     win.title('Graphical maze')
     canvas = Canvas(win, bg=BG_COLOR, width=CAN_WIDTH, height=CAN_HEIGHT)
     canvas.pack()
 
-    width = maze.get_width()
-    height = maze.get_height()
+    width = the_maze.get_width()
+    height = the_maze.get_height()
 
     # Draw maze
     DX = CAN_WIDTH // width
     DY = CAN_HEIGHT // height
     for y in range(height):
         for x in range(width):
-            walls = maze.get_cell(y, x).get_walls()
+            walls = the_maze.get_cell(y, x).get_walls()
 
             if walls[0]:
                 # Top wall
