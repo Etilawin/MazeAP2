@@ -20,6 +20,14 @@ optionnally tkinter to have a graphical interface.
 QuickStart
 ----------
 
+* From the console
+    $ cd maze
+    $ python3 src/main.py
+    $ python3 src/main.py -h # Gives help
+    ...
+
+* From python
+
   >>> from maze import *
   >>> a_maze = Maze(width = 50, height = 50, method = MAZE.algorithm)
   >>> solution = a_maze.find_path(0,0,49,49)
@@ -83,6 +91,7 @@ Project tree
    cell
    graphicalmaze
    maze
+   main
 
 
 
