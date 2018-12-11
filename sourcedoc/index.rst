@@ -84,6 +84,10 @@ Using graphical interface
   >>> a_path = a_maze.find_path(0,0,49,49)
   >>> graphicalmaze.show_path(some_maze, a_path)
 
+Timings
+=======
+
+To generate a maze of 50 by 50 it takes approximately 0.1 seconds.
 
 Project tree
 ============
