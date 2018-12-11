@@ -88,11 +88,11 @@ Timings
 =======
 
 .. list-table:: Timings
-   :widths: 25 25 50
+   :widths: 25 50
    :header-rows: 1
 
    * - Width and height
-     - time to generate 10 mazes (in seconds)
+     - Time to generate 10 mazes (in seconds)
    * - 10 x 10
      - 0.038097507999964364
    * - 20 x 20
