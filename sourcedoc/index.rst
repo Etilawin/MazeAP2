@@ -114,6 +114,59 @@ Timings
    * - 100 x 100
      - 19.35612800299998
 
+Commit order
+============
+
+2018-12-11 15:45 Finished the doc
+2018-12-11 15:38 Added the table with timings
+2018-12-11 15:17 added timings
+2018-12-11 15:17 added timings
+2018-12-11 15:00 few more things
+2018-12-10 15:07 Added some fussy details
+2018-12-10 14:58 Generated sphinx doc
+2018-12-10 14:09 Made a separate file
+2018-12-10 13:47 Added some argparse
+2018-12-08 17:47 TOTALLY FINISHED
+2018-12-08 17:40 clean doctests
+2018-12-08 17:19 Added the examples for the maze
+2018-12-08 16:56 Ended rst of maze
+2018-12-08 15:12 Added doc
+2018-12-08 15:07 PEP correct for maze + docstring
+2018-12-08 14:38 Pause
+2018-12-08 13:54 Working now ?
+2018-12-08 13:49 Added the documentation for the graphical maze
+2018-12-08 13:31 maze is now PEP correct
+2018-12-08 13:14 graphical maze is now OK with PEP
+2018-12-08 13:12 cell is now ok with PEP
+2018-12-07 10:07 La DOOOOOOOOOOOOOOOOOOOOOC
+2018-12-07 09:51 I hate documenting (cell)
+2018-12-07 00:12 Some renaming
+2018-12-05 14:23 Need to start the doc
+2018-12-05 14:17 reorganisation
+2018-12-04 18:28 Added a structure from another Practical
+2018-11-05 09:33 Added save_desc_to_file method in the Maze class but atm it is the same as save_to_file, awaiting for more information about this method
+2018-11-05 09:23 Renamed generate_text_file by save_to_file in Maze class
+2018-11-05 09:19 Replaced the Method class name by MAZE
+2018-11-04 14:52 Finished graphical module for mazes
+2018-11-04 14:51 Merge branch 'master' of https://bitbucket.org/Etilawin/maze
+2018-11-04 14:50 Revert "Revert "Created the graphical module for maze""
+2018-11-04 14:50 Revert "Revert "Revert "Created the graphical module for maze"""
+2018-11-04 14:50 Revert "Revert "Created the graphical module for maze""
+2018-11-04 14:50 Revert "Created the graphical module for maze"
+2018-11-04 14:46 Created the graphical module for maze Started documenting the modules
+2018-11-04 14:46 Started documenting the modules
+2018-11-02 16:58 Modified so it works perfectly
+2018-11-02 16:21 Same as last but for method generate_by_algorithm
+2018-11-02 16:19 Adapted the generate_by_hand method
+2018-11-02 16:11 Added flags and remade the generate_by_file method
+2018-11-02 15:49 Added solution finder
+2018-10-30 18:24 Adding the algorithm to generate maze
+2018-10-30 12:53 Removed the __pycache__ folder
+2018-10-30 12:52 Added generation of a maze by text, and corrected mistakes
+2018-10-28 14:00 Ended theorical implementation for hand made mazes
+2018-10-28 13:59 Ended theorical implementation for hand made mazes
+2018-10-27 11:36 First commit
+
 Project tree
 ============
 
