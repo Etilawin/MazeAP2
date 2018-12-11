@@ -87,6 +87,33 @@ Using graphical interface
 Timings
 =======
 
+.. list-table:: Timings
+   :widths: 25 25 50
+   :header-rows: 1
+
+   * - Width and height
+     - time to generate 10 mazes (in seconds)
+   * - 10 x 10
+     - 0.038097507999964364
+   * - 20 x 20
+     - 0.22399029899997913
+   * - 30 x 30
+     - 0.5100063020000221
+   * - 40 x 40
+     - 1.3165600109999787
+   * - 50 x 50
+     - 1.3165600109999787
+   * - 60 x 60
+     - 1.4434121799999957
+   * - 70 x 70
+     - 2.5921263440000075
+   * - 80 x 80
+     - 4.555961325999988
+   * - 90 x 90
+     - 5.949108254000009
+   * - 100 x 100
+     - 19.35612800299998
+
 To generate a maze of 50 by 50 it takes approximately 0.1 seconds.
 
 Project tree
