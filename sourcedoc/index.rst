@@ -114,8 +114,6 @@ Timings
    * - 100 x 100
      - 19.35612800299998
 
-To generate a maze of 50 by 50 it takes approximately 0.1 seconds.
-
 Project tree
 ============
 
